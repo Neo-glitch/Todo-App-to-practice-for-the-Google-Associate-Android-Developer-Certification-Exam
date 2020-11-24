@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +12,7 @@
         android:paddingBottom="8dp"
         android:background="@drawable/list_item_touch_selector">
 
-    <android.support.v7.widget.AppCompatCheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
             tools:text="A todoTask description"
             android:id="@+id/cb_todo_description"
             android:layout_width="wrap_content"
@@ -54,4 +54,4 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_todo_priority"
             app:layout_constraintBottom_toTopOf="@+id/tv_todo_priority"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

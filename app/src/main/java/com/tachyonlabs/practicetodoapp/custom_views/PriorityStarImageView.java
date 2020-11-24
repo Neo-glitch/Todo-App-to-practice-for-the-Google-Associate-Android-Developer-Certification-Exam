@@ -7,7 +7,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
-public class PriorityStarImageView extends android.support.v7.widget.AppCompatImageView {
+public class PriorityStarImageView extends androidx.appcompat.widget.AppCompatImageView {
     public final static int HIGH = 0;
     public final static int MEDIUM = 1;
     public final static int LOW = 2;

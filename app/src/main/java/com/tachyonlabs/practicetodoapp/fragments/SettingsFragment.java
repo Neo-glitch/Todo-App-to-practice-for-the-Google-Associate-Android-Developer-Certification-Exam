@@ -4,11 +4,11 @@ import com.tachyonlabs.practicetodoapp.R;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements
@@ -21,7 +21,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
         PreferenceScreen prefScreen = getPreferenceScreen();
-        int count = prefScreen.getPreferenceCount();
+        int count = prefScreen.getPreferenceCount();   // gets number of children preferences from this prefScreen
         for (int i = 0; i < count; i++) {
             Preference p = prefScreen.getPreference(i);
             if (!(p instanceof CheckBoxPreference)) {

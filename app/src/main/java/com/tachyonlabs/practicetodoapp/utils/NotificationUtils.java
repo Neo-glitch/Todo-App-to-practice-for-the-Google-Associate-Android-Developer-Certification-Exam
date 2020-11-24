@@ -11,7 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 
 public class NotificationUtils {
     private static final int PRACTICE_TODO_APP_DUE_AND_OVERDUE_NOTIFICATION_ID = 8785;

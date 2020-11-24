@@ -8,10 +8,10 @@ import com.tachyonlabs.practicetodoapp.models.TodoTask;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -57,7 +57,6 @@ public class AddOrEditTaskActivity extends AppCompatActivity {
                     calendar.setTimeInMillis(dueDate);
                     mBinding.dpDueDate.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
                 }
-
                 taskCompleted = todoTaskToAddOrEdit.getCompleted();
                 mBinding.cbTaskCompleted.setChecked(taskCompleted == TodoTask.TASK_COMPLETED);
             }
@@ -124,6 +123,8 @@ public class AddOrEditTaskActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+
+    // fun called when add/updated task btn clicked
     public void addOrUpdateTask(View view) {
         String description = mBinding.etTaskDescription.getText().toString().trim();
         int priority = TodoTask.HIGH_PRIORITY;
@@ -145,7 +146,7 @@ public class AddOrEditTaskActivity extends AppCompatActivity {
             if (mBinding.rbSelectDueDate.isChecked()) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(mBinding.dpDueDate.getYear(), mBinding.dpDueDate.getMonth(), mBinding.dpDueDate.getDayOfMonth(), 0, 0, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);  // added stuff, so getting time in millis will be more accurate
                 dueDate = calendar.getTimeInMillis();
                 Log.d(TAG, "millis = " + dueDate);
             }

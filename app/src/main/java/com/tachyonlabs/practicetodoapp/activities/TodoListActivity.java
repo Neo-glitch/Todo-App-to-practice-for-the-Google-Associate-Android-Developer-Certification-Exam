@@ -18,20 +18,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -61,7 +61,7 @@ public class TodoListActivity extends AppCompatActivity implements LoaderManager
         mRecyclerView.setLayoutManager(layoutManager);
         mTodoListAdapter = new TodoListAdapter(this, this);
         mRecyclerView.setAdapter(mTodoListAdapter);
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);  // itemDecorator of rvView;
         mRecyclerView.addItemDecoration(mDividerItemDecoration);
 
         FloatingActionButton fab = mBinding.fab;
@@ -117,6 +117,7 @@ public class TodoListActivity extends AppCompatActivity implements LoaderManager
             final Uri uri = TodoListContract.TodoListEntry.CONTENT_URI.buildUpon().appendPath(id).build();
             int isCompleted;
 
+
             final ContentValues contentValues = new ContentValues();
             contentValues.put(TodoListContract.TodoListEntry.COLUMN_DESCRIPTION, todoTask.getDescription());
             contentValues.put(TodoListContract.TodoListEntry.COLUMN_PRIORITY, todoTask.getPriority());
@@ -128,6 +129,7 @@ public class TodoListActivity extends AppCompatActivity implements LoaderManager
                 isCompleted = TodoTask.TASK_NOT_COMPLETED;
             }
 
+            // meant to be done on worker thread for best practices
             contentValues.put(TodoListContract.TodoListEntry.COLUMN_COMPLETED, isCompleted);
 
             // Wait half a second so they can briefly see the check appear or disappear before
@@ -161,6 +163,8 @@ public class TodoListActivity extends AppCompatActivity implements LoaderManager
         sendBroadcast(intent);
     }
 
+
+    /////// Start of LoaderManager CallBacks /////////
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
         if (loaderId == ID_TODOLIST_LOADER) {
@@ -193,10 +197,13 @@ public class TodoListActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
     }
+    /////////// End of LoaderManager CallBacks /////////////
 
     private String getSortOrderPreference() {
         return mSharedPreferences.getString(getString(R.string.pref_sort_by_key), getString(R.string.priority));
     }
+
+
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
